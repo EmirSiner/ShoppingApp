@@ -1,4 +1,6 @@
 package com.example.shoppingapp.utils
 
-class Constants {
+object Constants {
+    const val TABLE_NAME="ProductDatabase"
+    const val TABLE_POST_NAME= "products"
 }
