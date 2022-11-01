@@ -4,7 +4,7 @@ import androidx.room.TypeConverter
 
 class DaoConverter {
     @TypeConverter
-    fun toListofStrings(stringValue:String):List<String>?{
+    fun toListofStrings(stringValue:String):List<String>{
 
         return stringValue.split(",").map { it }
     }
