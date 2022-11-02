@@ -1,4 +1,4 @@
-package com.example.shoppingapp.ui
+package com.example.shoppingapp.ui.product
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.shoppingapp.data.model.product.ProductRecyclerViewItem
+import com.example.shoppingapp.data.model.product.ProductDTO
 import com.example.shoppingapp.databinding.FragmentProductsBinding
+import com.example.shoppingapp.ui.OnProductClickListener
+import com.example.shoppingapp.ui.PostViewEvent
+import com.example.shoppingapp.ui.ProductAdapter
+import com.example.shoppingapp.ui.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,6 +41,7 @@ class ProductsFragment : Fragment(), OnProductClickListener {
         binding.lifecycleOwner = viewLifecycleOwner
 
         lifecycleScope.launchWhenResumed {
+            binding.rvProduct.adapter = ProductAdapter(this@ProductsFragment)
 
             launch {
                 viewModel.uiEvent.collect { uiEvent ->
@@ -53,10 +58,14 @@ class ProductsFragment : Fragment(), OnProductClickListener {
         }
     }
 
-    override fun onPostClick(product: ProductRecyclerViewItem.ProductDTO) {
+    override fun onPostClick(product: ProductDTO) {
         coroutineJob.launch {
             viewModel.onFavoritePost(product)
         }
+    }
+
+    override fun onFragmentItemClick(product: ProductDTO) {
+
     }
 
 }

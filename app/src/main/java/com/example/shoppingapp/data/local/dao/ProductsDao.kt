@@ -4,14 +4,14 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.example.shoppingapp.data.local.base.BaseDao
 import com.example.shoppingapp.data.local.entity.ProductEntity
-import com.example.shoppingapp.data.model.product.ProductRecyclerViewItem
+import com.example.shoppingapp.data.model.product.Product
 import com.example.shoppingapp.utils.Constants
 
 @Dao
 interface ProductsDao : BaseDao<ProductEntity> {
 
     @Query("SELECT * FROM ${Constants.TABLE_PRODUCT_NAME}")
-    fun getAllPosts(): List<ProductRecyclerViewItem.Product>
+    fun getAllPosts(): List<Product>
 
     @Query("DELETE FROM ${Constants.TABLE_PRODUCT_NAME}")
     fun deleteAll()

@@ -2,7 +2,7 @@ package com.example.shoppingapp.data.repository
 
 import com.example.shoppingapp.data.local.ProductDatabase
 import com.example.shoppingapp.data.local.entity.ProductEntity
-import com.example.shoppingapp.data.model.product.ProductRecyclerViewItem
+import com.example.shoppingapp.data.model.product.Product
 import com.example.shoppingapp.data.source.api.ApiService
 import retrofit2.Response
 import javax.inject.Inject
@@ -12,13 +12,17 @@ import javax.inject.Inject
      private val productDatabase: ProductDatabase,
  ) : ProductsRepository {
      //remote
-     override suspend fun getAllProducts(): Response<List<ProductRecyclerViewItem.Product>>{
+     override suspend fun getAllProducts(): Response<List<Product>>{
          return apiService.getAllProducts()
      }
      //Local
 
-     override fun getPostById(id: Int): ProductEntity? {
+     override fun getPostById(id: Long): ProductEntity? {
         return productDatabase.productDao().getPostById(id.toString())
+     }
+
+     override suspend fun addProduct(product: ProductEntity) {
+         return productDatabase.cartDao().save(product)
      }
 
      override fun insertAddCart(product: ProductEntity) {

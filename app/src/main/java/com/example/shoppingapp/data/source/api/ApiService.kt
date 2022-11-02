@@ -3,7 +3,7 @@ package com.example.shoppingapp.data.source.api
 import com.example.shoppingapp.data.model.carts.Carts
 import com.example.shoppingapp.data.model.carts.CartsItem
 import com.example.shoppingapp.data.model.product.Categories
-import com.example.shoppingapp.data.model.product.ProductRecyclerViewItem
+import com.example.shoppingapp.data.model.product.Product
 import retrofit2.Response
 import retrofit2.http.GET
 
@@ -11,7 +11,7 @@ import retrofit2.http.GET
 interface ApiService {
     @GET("products")
     suspend fun getAllProducts(
-    ): Response<List<ProductRecyclerViewItem.Product>>
+    ): Response<List<Product>>
 
     @GET("products/categories")
     suspend fun getAllCategories(

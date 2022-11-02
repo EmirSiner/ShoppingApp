@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shoppingapp.R
 import com.example.shoppingapp.data.local.entity.ProductEntity
-import com.example.shoppingapp.data.model.product.ProductRecyclerViewItem
+import com.example.shoppingapp.data.mapper.ProductMapper
+import com.example.shoppingapp.data.model.product.Product
+import com.example.shoppingapp.data.model.product.ProductDTO
 import com.example.shoppingapp.data.repository.ProductsRepository
 import com.example.shoppingapp.utils.UiState
 import com.example.shoppingapp.utils.apiCall
@@ -20,16 +22,24 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductViewModel @Inject constructor(
     private val productRepository: ProductsRepository
+
 ) : ViewModel() {
 
-    private val _uiState = MutableLiveData<UiState<List<ProductRecyclerViewItem.Product>>?>()
-    val uiState: LiveData<UiState<List<ProductRecyclerViewItem.Product>>?> = _uiState
-
+    private val _uiState = MutableLiveData<UiState<List<Product>>?>()
+    val uiState: LiveData<UiState<List<Product>>?> = _uiState
+    private val mapper = ProductMapper()
     private val _uiEvent = MutableSharedFlow<PostViewEvent>()
     val uiEvent: SharedFlow<PostViewEvent> = _uiEvent
 
     init {
         getPosts()
+    }
+
+    fun addCart(product: ProductDTO){
+        viewModelScope.launch {
+            val productEntity: ProductEntity = mapper.mapToEntity(product)
+            productRepository.addProduct(productEntity)
+        }
     }
 
     private fun getPosts() {
@@ -40,7 +50,7 @@ class ProductViewModel @Inject constructor(
         }
     }
 
-    suspend fun onFavoritePost(product: ProductRecyclerViewItem.ProductDTO) {
+     fun onFavoritePost(product: ProductDTO) {
         product.id.let { safePostId ->
             productRepository.getPostById(safePostId)?.let {
                 productRepository.deleteAddCart(it)
@@ -48,28 +58,20 @@ class ProductViewModel @Inject constructor(
             } ?: kotlin.run {
                 productRepository.insertAddCart(
                     ProductEntity(
-                       id = product.id.toLong(),
+                        id = product.id.toLong(),
                         title = product.title,
-                        price  = product.price,
+                        price = product.price,
                         category = product.category,
                         description = product.description.toString(),
                         image = product.image
 
                     )
                 )
-
             }
         }
     }
 
-    private suspend fun isExists(postId: Int?): Boolean {
-        postId?.let {
-            productRepository.getPostById(it)?.let {
-                return true
-            }
-        }
-        return false
-    }
+
 }
 
 sealed class PostViewEvent {

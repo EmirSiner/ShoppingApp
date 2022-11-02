@@ -7,16 +7,22 @@
 
     <fragment
         android:id="@+id/productsFragment"
-        android:name="com.example.shoppingapp.ui.ProductsFragment"
+        android:name="com.example.shoppingapp.ui.product.ProductsFragment"
         android:label="ProductsFragment"
         tools:layout="@layout/fragment_products">
+
         <action
-            android:id="@+id/action_productsFragment_to_productDetail"
-            app:destination="@id/productDetail" />
+            android:id="@+id/action_productsFragment_to_bottomSheetDialog"
+            app:destination="@id/bottomSheetDialog" />
     </fragment>
     <fragment
-        android:id="@+id/productDetail"
-        android:name="com.example.shoppingapp.ui.detail.ProductDetail"
-        android:label="fragment_product_detail"
-        tools:layout="@layout/fragment_product_detail" />
+        android:id="@+id/bottomSheetDialog"
+        android:name="com.example.shoppingapp.ui.detail.BottomSheetDialog"
+        android:label="BottomSheetDialog"
+        tools:layout="@layout/fragment_bottom_sheet_dialog">
+        <argument
+            android:name="ProductForBottomSheet"
+            app:argType="com.example.shoppingapp.data.model.product.ProductDTO" />
+    </fragment>
+
 </navigation>
