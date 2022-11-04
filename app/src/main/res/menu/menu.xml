@@ -6,7 +6,7 @@
         android:title="@string/product_item" />
 
     <item
-        android:id="@+id/cartFragment"
+        android:id="@+id/basketFragment"
         android:title="@string/cart" />
     <item
         android:id="@+id/searchFragment"

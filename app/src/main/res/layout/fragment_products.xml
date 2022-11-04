@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.shoppingapp.ui.ProductViewModel" />
+            type="com.example.shoppingapp.ui.product.ProductViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

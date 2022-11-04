@@ -9,4 +9,16 @@
     <string name="cart">Cart</string>
     <string name="search">Search</string>
     <string name="product_item">Product</string>
+    <string name="delete">Delete</string>
+    <string name="welcome_to_shoppingapp">Welcome to ShoppingApp</string>
+    <string name="get_your_cargo_in_one_day">Get your cargo in one day.</string>
+    <string name="we_will_ship_it_to_you">We will ship it to you.</string>
+    <string name="find_the_product_you_want">Find the product you want.</string>
+    <string name="prev">Prev</string>
+    <string name="on_boarding_skip_button">Skip</string>
+    <string name="on_boarding_start_button">Start</string>
+    <string name="register">Register</string>
+    <string name="send_a_username">Send a username</string>
+    <string name="send_a_mail">Send a mail</string>
+    <string name="send_a_password">Send a password</string>
 </resources>

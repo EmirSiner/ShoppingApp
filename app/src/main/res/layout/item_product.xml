@@ -5,7 +5,7 @@
     <data>
         <variable
             name="dataHolder"
-            type="com.example.shoppingapp.data.model.product.ProductDTO" />
+            type="com.example.shoppingapp.data.model.product.Product" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

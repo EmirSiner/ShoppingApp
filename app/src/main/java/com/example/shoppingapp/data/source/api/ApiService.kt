@@ -21,10 +21,6 @@ interface ApiService {
     suspend fun getAllCarts(
     ):Response<Carts>
 
-    @GET("carts/productId")
-    suspend fun getAllCartsId(
-    ):Response<CartsItem>
-
 }
 
 // response  isteğin durumunu verir. (200 400 )

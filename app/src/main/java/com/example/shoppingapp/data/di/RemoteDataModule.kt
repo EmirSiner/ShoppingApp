@@ -3,6 +3,8 @@ package com.example.shoppingapp.data.di
 import com.example.shoppingapp.data.interceptor.AuthInterceptor
 import com.example.shoppingapp.data.source.api.ApiService
 import com.example.shoppingapp.utils.Constants
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -53,6 +55,14 @@ object RemoteDataModule {
     @Singleton
     @Provides
     fun provideApiService(retrofit: Retrofit) = retrofit.create(ApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideFirebaseService() = FirebaseAuth.getInstance()
+
+    @Provides
+    @Singleton
+    fun provideFirebaseFireStore() = FirebaseFirestore.getInstance()
 
 
 }

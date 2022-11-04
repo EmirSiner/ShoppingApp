@@ -1,6 +1,5 @@
 package com.example.shoppingapp.ui.detail
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +8,12 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.shoppingapp.data.model.product.Product
-import com.example.shoppingapp.data.model.product.ProductDTO
+import com.example.shoppingapp.data.model.product.Product
 import com.example.shoppingapp.databinding.FragmentBottomSheetDialogBinding
-import com.example.shoppingapp.ui.ProductViewModel
+import com.example.shoppingapp.ui.product.ProductViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
-
+// TODO viewmodelını yaz
 @AndroidEntryPoint
 class BottomSheetDialog : BottomSheetDialogFragment() {
 
@@ -35,30 +34,11 @@ class BottomSheetDialog : BottomSheetDialogFragment() {
         _binding = FragmentBottomSheetDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
-    private fun addCart(products: ProductDTO){
-        viewModel.addCart(products)
+    private fun addCart(products: List<Product>){
+        viewModel.addDetail(products)
     }
 
 
-    @SuppressLint("SetTextI18n")
-    fun showDialog() {
-        val args = arguments
-        val product: ProductDTO? = args?.getParcelable("productForDialog")
-        with(binding) {
-            if (product != null) {
-                Glide.with(ivDialog)
-                    .load(product.image)
-                    .into(ivDialog)
-                tvTitle.text = product.title
-                tvCategory.text = product.category
-                tvDescription.text = product.description
-                tvPrice.text = "$" + product.price.toString()
-                addButton.setOnClickListener {
-                    addCart(product)
-                    Toast.makeText(requireContext(), "Added to cart", Toast.LENGTH_LONG).show()
-                }
-            }
-        }
+
     }
 
-}
