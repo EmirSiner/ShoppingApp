@@ -5,9 +5,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.shoppingapp.utils.Constants
 
-@Entity(tableName= Constants.TABLE_PRODUCT_NAME)
-class ProductEntity(
-    @PrimaryKey (autoGenerate = true)
+@Entity(tableName= "products")
+data class ProductEntity(
+    @PrimaryKey
     @ColumnInfo(name = "id")
     val id: Long,
     @ColumnInfo(name = "title")
@@ -19,5 +19,5 @@ class ProductEntity(
     @ColumnInfo(name = "category")
     val category:String?,
     @ColumnInfo(name = "image")
-    val image: String?,
+    val image: String?
 )

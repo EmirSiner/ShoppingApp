@@ -3,12 +3,10 @@ package com.example.shoppingapp.ui.basket
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.shoppingapp.data.local.entity.CartEntity
 import com.example.shoppingapp.data.local.entity.ProductEntity
-import com.example.shoppingapp.data.model.product.Product
+import com.example.shoppingapp.data.model.carts.CartFirebaseModel
 import com.example.shoppingapp.data.repository.cart.CartRepository
-import com.example.shoppingapp.data.repository.product.ProductRepositoryImpl
-import com.example.shoppingapp.data.repository.product.ProductsRepository
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,23 +14,24 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BasketViewModel  @Inject constructor(
-    private val dbRepository:CartRepository
+    private val cartRepository: CartRepository,
+    private val auth: FirebaseAuth
 ): ViewModel() {
-    val basketList: MutableLiveData<List<Product>> = MutableLiveData()
-    val progressBar = MutableLiveData<Boolean>()
+    val basketList: MutableLiveData<List<ProductEntity>> = MutableLiveData()
 
-
-    fun getAllProductFromRoom(){
-        viewModelScope.launch(Dispatchers.IO) {
-            progressBar.postValue(true)
-
-        }
+    fun addToUserCart(cartFirebaseModel: CartFirebaseModel) {
+       viewModelScope.launch{ cartRepository.addToUserCart(cartFirebaseModel)}
     }
 
-    fun deleteProduct(cartEntity: CartEntity){
-        viewModelScope.launch(Dispatchers.IO) {
-            dbRepository.delete(cartEntity)
-            getAllProductFromRoom()
-        }
+    fun deleteProduct(cartFirebaseModel: CartFirebaseModel) {
+        cartRepository.deleteToUserCart(cartFirebaseModel)
+    }
+
+    fun updateToUserCartProduct(cartFirebaseModel: CartFirebaseModel) {
+        cartRepository.updateToUserCartProduct(cartFirebaseModel)
+    }
+
+    fun clearUserCart() {
+        cartRepository.clearUserCart()
     }
 }

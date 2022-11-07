@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
-import com.example.shoppingapp.data.model.product.Product
+import com.example.shoppingapp.data.local.entity.ProductEntity
 import com.example.shoppingapp.data.model.product.Product
 import com.example.shoppingapp.databinding.FragmentBottomSheetDialogBinding
 import com.example.shoppingapp.ui.product.ProductViewModel
@@ -34,11 +32,5 @@ class BottomSheetDialog : BottomSheetDialogFragment() {
         _binding = FragmentBottomSheetDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
-    private fun addCart(products: List<Product>){
-        viewModel.addDetail(products)
-    }
-
-
-
     }
 

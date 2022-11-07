@@ -3,8 +3,6 @@ package com.example.shoppingapp.data.di
 import com.example.shoppingapp.data.interceptor.AuthInterceptor
 import com.example.shoppingapp.data.source.api.ApiService
 import com.example.shoppingapp.utils.Constants
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,19 +16,16 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RemoteDataModule {
+
     @Provides
     @Singleton
-    fun provideRetrofit(
-        okHttpClient: OkHttpClient,
-        converterFactory: GsonConverterFactory
-    ): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(converterFactory)
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-
 
     @Provides
     @Singleton
@@ -48,21 +43,8 @@ object RemoteDataModule {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-    @Provides
-    @Singleton
-    fun provideGsonConverterFactory() = GsonConverterFactory.create()
-
     @Singleton
     @Provides
-    fun provideApiService(retrofit: Retrofit) = retrofit.create(ApiService::class.java)
-
-    @Provides
-    @Singleton
-    fun provideFirebaseService() = FirebaseAuth.getInstance()
-
-    @Provides
-    @Singleton
-    fun provideFirebaseFireStore() = FirebaseFirestore.getInstance()
-
+    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 
 }

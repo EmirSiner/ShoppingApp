@@ -17,7 +17,6 @@ class RegisterViewModel @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
     private val fireStore: FirebaseFirestore,
 ) : ViewModel() {
-
     private val _uiEvent = MutableSharedFlow<RegisterViewEvent>(replay = 0)
     val uiEvent: SharedFlow<RegisterViewEvent> = _uiEvent
 
@@ -26,6 +25,7 @@ class RegisterViewModel @Inject constructor(
             isValidFields(email, password, confirmPassword, userName)?.let {
                 _uiEvent.emit(RegisterViewEvent.ShowError(it))
             } ?: kotlin.run {
+
                 firebaseAuth.createUserWithEmailAndPassword(
                     email,
                     password

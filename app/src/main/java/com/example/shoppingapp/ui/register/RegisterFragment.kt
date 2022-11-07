@@ -21,7 +21,6 @@ import kotlinx.coroutines.launch
 class RegisterFragment : Fragment() {
     private val viewModel by viewModels<RegisterViewModel>()
     private lateinit var binding: FragmentRegisterBinding
-    private var navController: NavController? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,13 +31,12 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = findNavController()
         lifecycleScope.launchWhenResumed {
             launch {
                 viewModel.uiEvent.collect {
                     when (it) {
                         is RegisterViewEvent.NavigateToMain -> {
-                            navController?.navigate(
+                           findNavController().navigate(
                                 resId = R.id.action_registerFragment_to_productsFragment,
                                 null,
                                 navOptions = NavOptions.Builder().setPopUpTo(0, true).build()
