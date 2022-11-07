@@ -5,17 +5,19 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.shoppingapp.utils.Constants
 
-@Entity(tableName= Constants.TABLE_POST_NAME)
-class ProductEntity (
-    @PrimaryKey(autoGenerate = true)
+@Entity(tableName= "products")
+data class ProductEntity(
+    @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: Long? = null,
+    val id: Long,
     @ColumnInfo(name = "title")
     val title: String?,
     @ColumnInfo(name = "price")
-    val price:Int?,
+    val price:Float?,
     @ColumnInfo(name = "description")
-    val description:Int?,
+    val description: String,
     @ColumnInfo(name = "category")
-    val category:Int?
+    val category:String?,
+    @ColumnInfo(name = "image")
+    val image: String?
 )

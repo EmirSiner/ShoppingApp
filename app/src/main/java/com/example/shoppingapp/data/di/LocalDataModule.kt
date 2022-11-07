@@ -1,7 +1,7 @@
 package com.example.shoppingapp.data.di
 
 import android.content.Context
-import com.example.shoppingapp.data.local.ProductDatabase
+import com.example.shoppingapp.data.datastore.DataStoreManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,16 +9,12 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@Module
 @InstallIn(SingletonComponent::class)
-object LocalDataModule {
-    @Provides
-    @Singleton
-    fun     providePostsDatabase(@ApplicationContext appContext : Context): ProductDatabase {
-        return ProductDatabase.getDatabase(appContext)
-    }
+@Module
+class LocalDataModule {
 
     @Singleton
     @Provides
-    fun providePostDao(db : ProductDatabase) = db.productDao()
+    fun provideDataStoreManager(@ApplicationContext appContext: Context): DataStoreManager =
+        DataStoreManager(appContext)
 }

@@ -1,26 +1,26 @@
 package com.example.shoppingapp.data.local.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
-import com.example.shoppingapp.data.local.base.BaseDao
 import com.example.shoppingapp.data.local.entity.ProductEntity
-import com.example.shoppingapp.utils.Constants
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface ProductsDao : BaseDao<ProductEntity> {
+interface ProductsDao {
 
-    @Query("SELECT * FROM ${Constants.TABLE_POST_NAME}")
-    fun getAllPosts():List<ProductEntity>
+    @Query("SELECT * FROM products")
+    fun getAllProducts(): Flow<List<ProductEntity>>
 
-    @Query("DELETE FROM ${Constants.TABLE_POST_NAME}")
-    fun deleteAll()
+    @Insert
+    suspend fun insertAllProducts(products: List<ProductEntity>)
 
-    @Query("SELECT * FROM ${Constants.TABLE_POST_NAME} WHERE id = :productId")
-    fun getPostById(productId: String): ProductEntity?
+    @Query("SELECT COUNT(*) FROM products")
+    suspend fun getProductItemCount(): Long
 
-    @Query("DELETE FROM ${Constants.TABLE_POST_NAME} WHERE id = :productId")
-    fun deleteAddCartById(productId: String)
+    @Query("SELECT * FROM products WHERE title LIKE '%' || :query || '%'")
+    fun filterProductByName(query: String): Flow<List<ProductEntity>>
 
-
-
+    @Query("SELECT * FROM products WHERE category = :category")
+    fun filterProductByCategory(category: String): Flow<List<ProductEntity>>
 }
