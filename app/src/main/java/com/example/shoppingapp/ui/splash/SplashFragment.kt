@@ -20,7 +20,7 @@ class SplashFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         lifecycleScope.launchWhenResumed {
-            delay(2000L)
+            delay(2000)
             launch {
                 viewModel.uiEvent.collect {
                     when (it) {

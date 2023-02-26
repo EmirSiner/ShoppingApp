@@ -10,7 +10,7 @@ object BindingAdapters {
     @BindingAdapter("loadImage")
     fun loadImage(view: ImageView, url: String?) {
         Glide.with(view.context)
-            .load("${Constants.IMAGE_URL}$url")
+            .load(url)
             .into(view)
     }
 }

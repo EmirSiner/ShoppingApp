@@ -3,7 +3,7 @@ package com.example.shoppingapp.data.mapper
 import com.example.shoppingapp.data.local.entity.ProductEntity
 import com.example.shoppingapp.data.model.product.Product
 import javax.inject.Inject
-
+// TODO buraya bak
 class ProductMapper @Inject constructor() : EntityMapper<List<ProductEntity>, List<Product>> {
 
 

@@ -35,9 +35,6 @@ class DataStoreManager(context: Context) {
         }
     }
 
-    val getUserName: Flow<String> = dataStore.data.map { preferences ->
-        preferences[PreferencesKeys.USER_NAME] ?: ""
-    }
 
 
 }

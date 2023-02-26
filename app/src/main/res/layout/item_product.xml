@@ -10,7 +10,12 @@
         <variable
             name="listener"
             type="com.example.shoppingapp.ui.product.OnProductClickListener" />
-    </data>
+
+
+    <variable
+        name="onClick"
+        type="com.example.shoppingapp.ui.product.OnProductClickListener" />
+</data>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -30,7 +35,7 @@
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="@{dataHolder.title}"/>
             <TextView
@@ -39,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
-                android:text="@{dataHolder.price.toString()}"/>
+                android:text="@{dataHolder.priceText}"/>
 
 
             <com.google.android.material.button.MaterialButton
@@ -48,7 +53,7 @@
                 app:icon="@drawable/ic_baseline_shopping_cart_24"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> listener.onFragmentItemClick(dataHolder)}"
+                android:onClick="@{() -> listener.onBasketItemClick(dataHolder)}"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/purple_500"
                 android:text="@string/add_to_cart"

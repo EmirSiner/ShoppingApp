@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/productsFragment">
+    app:startDestination="@+id/productsFragment">
 
     <fragment
         android:id="@+id/productsFragment"
@@ -14,22 +14,29 @@
         <action
             android:id="@+id/action_productsFragment_to_bottomSheetDialog"
             app:destination="@id/bottomSheetDialog" />
+        <action
+            android:id="@+id/action_productsFragment_to_basketFragment"
+            app:destination="@id/basketFragment" />
     </fragment>
     <fragment
         android:id="@+id/bottomSheetDialog"
         android:name="com.example.shoppingapp.ui.detail.BottomSheetDialog"
         android:label="BottomSheetDialog"
         tools:layout="@layout/fragment_bottom_sheet_dialog">
-        <argument
-            android:name="ProductForBottomSheet"
-            app:argType="com.example.shoppingapp.data.model.product.ProductDTO" />
+        <action
+            android:id="@+id/action_bottomSheetDialog_to_basketFragment"
+            app:destination="@id/basketFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/basketFragment"
         android:name="com.example.shoppingapp.ui.basket.BasketFragment"
         android:label="@string/cart"
-        tools:layout="@layout/fragment_basket" />
+        tools:layout="@layout/fragment_basket" >
+        <argument
+            android:name="productId"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/onBoardingFragment"
         android:name="com.example.shoppingapp.ui.onboarding.OnBoardingFragment"
@@ -70,5 +77,10 @@
             android:id="@+id/action_registerFragment_to_productsFragment"
             app:destination="@id/productsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.shoppingapp.ui.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
 
 </navigation>

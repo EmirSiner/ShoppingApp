@@ -1,9 +1,7 @@
 package com.example.shoppingapp.data.model.product
 
-import android.os.Parcelable
-import androidx.room.Entity
+
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
 data class Product(
     @SerializedName("id")
@@ -20,13 +18,3 @@ data class Product(
     val image: String?,
     )
 
-@Parcelize
-data class ProductDTO(
-    val id: Long,
-    val title: String?,
-    val price: Float?,
-    val category: String?,
-    val description: String,
-    val image: String?,
-    val isAddToCard: Boolean
-): Parcelable
