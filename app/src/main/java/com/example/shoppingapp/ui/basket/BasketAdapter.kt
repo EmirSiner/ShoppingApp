@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.shoppingapp.data.local.entity.ProductEntity
-import com.example.shoppingapp.data.model.product.Product
 import com.example.shoppingapp.databinding.FragmentBasketItemBinding
 
-class BasketAdapter (private val listener: BasketItemClickListener) : RecyclerView.Adapter<BasketAdapter.BasketViewHolder>(){
+class BasketAdapter (
+    private val listener: BasketItemClickListener
+    ) : RecyclerView.Adapter<BasketAdapter.BasketViewHolder>(){
 
     class BasketViewHolder(val binding: FragmentBasketItemBinding): RecyclerView.ViewHolder(binding.root)
 

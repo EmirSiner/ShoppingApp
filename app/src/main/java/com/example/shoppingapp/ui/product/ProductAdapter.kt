@@ -34,11 +34,12 @@ class ProductAdapter(
             binding.dataHolder = product
             binding.listener = listener
             binding.executePendingBindings()
+
         }
     }
 
 
-    object ProductDiffUtil : DiffUtil.ItemCallback<ProductEntity>() {
+   private companion object ProductDiffUtil : DiffUtil.ItemCallback<ProductEntity>() {
 
         override fun areItemsTheSame(oldItem: ProductEntity, newItem: ProductEntity): Boolean {
             return oldItem.id == newItem.id
@@ -52,5 +53,5 @@ class ProductAdapter(
 
 interface OnProductClickListener {
     fun onProductClick(id: Int)
-    fun onFragmentItemClick(product: ProductEntity)
+    fun onBasketItemClick(product: ProductEntity)
 }

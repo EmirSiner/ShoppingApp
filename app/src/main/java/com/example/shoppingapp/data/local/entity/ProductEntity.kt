@@ -20,4 +20,6 @@ data class ProductEntity(
     val category:String?,
     @ColumnInfo(name = "image")
     val image: String?
-)
+){
+    val priceText:String get() = price.toString()
+}
